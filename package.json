@@ -1,0 +1,12 @@
+{
+  "name": "832402123-calculator-frontend",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "English calculator client by WuYiming (832402123)",
+  "engines": { "node": ">=24.0.0" },
+  "scripts": {
+    "start": "node serve.js",
+    "check": "node --check src/app.js && node --check serve.js"
+  }
+}

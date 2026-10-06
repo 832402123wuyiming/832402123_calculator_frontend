@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A calculator with server-side arithmetic and persistent calculation history.">
+  <title>Calc Studio · WuYiming</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <div class="shell">
+    <header class="topbar">
+      <a class="brand" href="./"><span class="brand-icon">=</span> Calc Studio</a>
+      <div class="top-actions"><span id="connection-status" class="connection">Connecting to API</span><button id="theme-button" class="small-button" aria-label="Switch color theme">Dark theme</button></div>
+    </header>
+    <main>
+      <section class="intro">
+        <div class="eyebrow">SOFTWARE ENGINEERING · ASSIGNMENT 01</div>
+        <h1>A little clarity.<br>A lot of possibility.</h1>
+        <p>Work through the numbers. Keep the steps that matter.</p>
+        <div class="author">WuYiming <span>·</span> 832402123 <span>·</span> Front-end / back-end separation</div>
+      </section>
+      <div class="workspace">
+        <section class="calculator card" aria-label="Calculator">
+          <div class="card-heading"><h2>Calculator</h2><span class="badge">SERVER-SIDE</span></div>
+          <form id="calculate-form">
+            <label for="expression">YOUR EXPRESSION</label>
+            <input id="expression" name="expression" maxlength="256" autocomplete="off" spellcheck="false" placeholder="Try (12 + 8) / 4" aria-describedby="input-help">
+            <div class="answer-line"><span id="answer-label">RESULT</span><output id="result" aria-live="polite">—</output></div>
+            <div id="message" class="message" role="status">Enter an expression to get started.</div>
+            <div class="keypad" aria-label="Calculator buttons">
+              <button type="button" data-action="clear" class="utility">AC</button><button type="button" data-value="(" class="utility">(</button><button type="button" data-value=")" class="utility">)</button><button type="button" data-value="/" class="operator" aria-label="Divide">÷</button>
+              <button type="button" data-value="7">7</button><button type="button" data-value="8">8</button><button type="button" data-value="9">9</button><button type="button" data-value="*" class="operator" aria-label="Multiply">×</button>
+              <button type="button" data-value="4">4</button><button type="button" data-value="5">5</button><button type="button" data-value="6">6</button><button type="button" data-value="-" class="operator" aria-label="Subtract">−</button>
+              <button type="button" data-value="1">1</button><button type="button" data-value="2">2</button><button type="button" data-value="3">3</button><button type="button" data-value="+" class="operator" aria-label="Add">+</button>
+              <button type="button" data-action="backspace" class="utility" aria-label="Backspace">⌫</button><button type="button" data-value="0">0</button><button type="button" data-value=".">.</button><button type="submit" id="calculate-button" class="equals" aria-label="Calculate">=</button>
+            </div>
+          </form>
+          <p id="input-help" class="keyboard-help"><kbd>Enter</kbd> calculate <span>·</span> <kbd>Esc</kbd> clear <span>·</span> 12 decimal places</p>
+        </section>
+        <section class="history card" aria-label="Calculation history">
+          <div class="card-heading"><div><h2>History <span id="history-count" class="count">0</span></h2><p>Saved to the database, ready when you return.</p></div><button id="refresh-button" class="icon-button" aria-label="Refresh history">↻</button></div>
+          <label class="search-label" for="history-search">SEARCH YOUR CALCULATIONS</label>
+          <input type="search" id="history-search" placeholder="Find an expression or result" maxlength="256">
+          <div id="history-list" class="history-list" aria-live="polite"><div class="empty-state">Loading history…</div></div>
+          <div class="pagination"><button id="previous-button" class="small-button" disabled>← Previous</button><span id="page-label">Page 1 of 1</span><button id="next-button" class="small-button" disabled>Next →</button></div>
+          <div class="history-note"><span class="note-dot"></span> Successful calculations are saved automatically.</div>
+        </section>
+      </div>
+      <section class="how-it-works"><span>01 <strong>Enter an expression</strong></span><span>02 <strong>The API calculates</strong></span><span>03 <strong>SQLite keeps the record</strong></span></section>
+    </main>
+    <footer><span>Built for thoughtful calculations.</span><span>HTTP / JSON <span class="footer-dot">·</span> Persistent SQLite history</span></footer>
+  </div>
+</body>
+</html>
