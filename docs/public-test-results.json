@@ -1,0 +1,53 @@
+{
+  "executedAt": "2026-10-06T16:42:37.343Z",
+  "frontend": "https://wuyiming-832402123-calculator.sleek-ibex-2403.chatgpt.site",
+  "backend": "https://wuyiming-832402123-calculator-api.sleek-ibex-2403.chatgpt.site",
+  "proxyUsed": true,
+  "checks": [
+    {
+      "check": "Public database health",
+      "passed": true
+    },
+    {
+      "check": "Public frontend and cross-origin API",
+      "passed": true
+    },
+    {
+      "check": "12+8",
+      "expected": "20",
+      "passed": true
+    },
+    {
+      "check": "0.1+0.2",
+      "expected": "0.3",
+      "passed": true
+    },
+    {
+      "check": "(1+2)*3",
+      "expected": "9",
+      "passed": true
+    },
+    {
+      "check": "3*-2",
+      "expected": "-6",
+      "passed": true
+    },
+    {
+      "check": "Public division-by-zero error",
+      "passed": true
+    },
+    {
+      "check": "Public history survives browser reload",
+      "passed": true
+    },
+    {
+      "check": "Public database deletion",
+      "passed": true
+    },
+    {
+      "check": "Public demonstration image",
+      "passed": true
+    }
+  ],
+  "uncaughtPageErrors": []
+}

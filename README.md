@@ -2,6 +2,9 @@
 
 **Author:** WuYiming · **Student ID:** 832402123
 
+**Live application:** https://wuyiming-832402123-calculator.sleek-ibex-2403.chatgpt.site  
+**API health:** https://wuyiming-832402123-calculator-api.sleek-ibex-2403.chatgpt.site/api/health
+
 An English, responsive calculator interface with server-generated results and database history. This is the front-end repository; the API is in the separate `832402123_calculator_backend` repository.
 
 ## Technology and runtime
@@ -12,7 +15,7 @@ Download the repository and open a terminal in its root. No package installation
 
 ## Start locally
 
-First start the back-end API on port 3000. Then run:
+The shipped configuration uses the deployed HTTPS API. To test both services locally, set `apiBaseUrl` in `src/config.js` to `http://localhost:3000` and start the separate back-end API on port 3000. Then run:
 
 ```sh
 node serve.js
@@ -30,7 +33,7 @@ window.CALCULATOR_CONFIG = {apiBaseUrl: 'http://localhost:3000'};
 
 Use the API origin without `/api` or a trailing slash. For public deployment, replace this with the actual HTTPS API address. The back end must allow the front end's exact origin using `ALLOWED_ORIGINS`. GitHub Pages projects share the origin `https://USERNAME.github.io`; the repository path is not part of the origin.
 
-The client requires no database initialization. The back end creates SQLite automatically. History is retrieved from `/api/history`, never from LocalStorage. Only the theme preference is stored locally.
+The client requires no database initialization. The local back end creates SQLite automatically; the public API uses a migrated D1 SQLite database. History is retrieved from `/api/history`, never from LocalStorage. Only the theme preference is stored locally.
 
 ## Features
 
@@ -43,17 +46,13 @@ The client requires no database initialization. The back end creates SQLite auto
 
 Expressions support `+`, `-`, `*`, `/`, parentheses, unary signs, and decimals. Calculation limits and rounding rules are documented in the back-end README. The UI uses × and ÷ labels but sends mathematical operators to the server.
 
-## Deploy on GitHub Pages
+## Public deployment
 
-1. Publish this project as its own repository with a `main` branch.
-2. Update `src/config.js` to the deployed HTTPS API address.
-3. Open **Settings → Pages → Source → GitHub Actions**.
-4. Run the included **Deploy frontend to GitHub Pages** workflow or push to `main`.
-5. Open the actual Pages URL shown by the deployment. Check API connection, a calculation, history refresh, and deletion.
+The project is published with Sites as a static HTTPS application. Its production artifact contains the HTML/CSS/JavaScript files and demonstration screenshots. The API is a separately deployed service, with persistent D1 SQLite storage. Public browser verification confirmed calculation, error handling, cross-origin communication, refresh persistence, and record deletion.
 
-The workflow publishes only `src/`. It does not deploy the back-end service. Both services must remain accessible during grading. For workflow setup, see [GitHub Pages documentation](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+Both services must remain accessible during grading. The public deployment does not depend on the local Node.js processes.
 
-Alternatively, serve the `src/` directory from any static HTTPS host. `serve.js` is intended for local development.
+Alternatively, serve the `src/` directory from another static HTTPS host. Configure the actual front-end origin in the API's allowed-origin list. `serve.js` is intended for local development.
 
 ## Verification
 
@@ -64,7 +63,7 @@ node --check serve.js
 
 To verify separation, stop the API and enter a new expression: the UI should show an API error and no calculated result. Reopen the front end after a successful calculation to confirm the stored history remains visible. Delete a record and refresh to confirm database deletion.
 
-Actual local demonstration screenshots are in [docs/screenshots](docs/screenshots). They do not claim that public deployment has been completed.
+Actual local demonstration screenshots and a public deployment screenshot are in [docs/screenshots](docs/screenshots).
 
 ## Structure
 
@@ -76,7 +75,6 @@ src/
   app.js        Input handling, Fetch calls, and rendering
 serve.js        Local static file server
 docs/           Real demonstration screenshots
-.github/        GitHub Pages deployment workflow
 codestyle.md    Code standards
 ```
 
